@@ -1,0 +1,736 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/*------------------------------
+レスポンシブ
+------------------------------*/
+$breakpoints: (
+  'sp': 'screen and (max-width: 767px)',   //767以下
+  'tb': 'screen and (min-width: 768px) and (max-width: 1246px)',   //768以上
+  'pc': 'screen and (min-width: 1247px)'   //1247以上
+)!default;
+
+//
+@mixin mq($breakpoint: lg) {
+  //map-get(マップ型変数, キー)で値を取得
+    @media #{map-get($breakpoints, $breakpoint)} {
+      @content;
+    }
+  }
+
+/*------------------------------
+カラー
+------------------------------*/
+
+$primary-color: #e88f57;
+$sub-color: #9bb8aa;
+$primary-font-color:#333333;
+
+/*------------------------------
+共通
+------------------------------*/
+
+// pcの時表示
+@include mq('sp') {
+  .is-pc {
+    display: none;
+  }
+}
+
+// spの時表示
+@include mq('pc') {
+  .is-sp {
+    display: none;
+  }
+}
+
+body {
+  font-size: 16px;
+  color: $primary-font-color;
+  line-height: 1.7;
+  font-family: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: content-box;
+
+}
+
+section {
+  padding-bottom: 120px;
+}
+
+.util-title {
+  font-family: 'Lato', sans-serif;;
+  text-align: center;
+  font-weight: bold;
+  padding: 90px 0 60px;
+  position: relative;
+  font-size: 40px;
+
+  @include mq('sp') {
+    padding: 40px 0 40px;
+  }
+
+  
+  ::after {
+    content:"";
+    width: 100px;
+    color: $primary-color;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+}
+
+/*------------------------------
+header
+------------------------------*/
+
+.header {
+  background: rgba(155, 184, 170, 0.5);
+  // background: rgba(232, 143, 87, 0.5);
+  // background: rgba(253, 216, 59, 0.5);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  visibility: hidden;
+
+  &.is-show {
+    visibility: visible;
+  }
+
+  .header-inner {
+    display: flex;
+  }
+
+
+  // ハンバーガーメニューの位置調整
+  .drawer-hamburger {
+    .drawer--right & {
+      right: 30px;
+    }
+  }
+
+  .drawer-hamburger-icon {
+    background:  $primary-font-color;
+
+    // ✖️にしている
+    .drawer-open & {
+      background: transparent;
+    }
+
+    &::before,
+    &::after {
+    background:  $primary-font-color;
+    }
+  }
+
+  .header-logo {
+    width: 230px;
+    margin: 8px 0;
+
+    @include mq('sp') {
+      width: 170px;
+    }
+  }
+
+  .header-nav {
+    margin-left: auto;
+
+    @include mq('sp') {
+      top: 50px;
+      background: #fff;
+      padding-top: 20px;
+    }
+  }
+
+  .header-menu {
+    @include mq('tb') {
+      display: flex;
+    }
+
+    @include mq('pc') {
+      display: flex;
+    }
+  }
+
+  .header-nav-item {
+    margin-left: 40px;
+    cursor: pointer;
+
+    @include mq('tb') {
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+
+    @include mq('pc') {
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+
+    :hover {
+      color:$primary-color;
+    }
+  }
+
+  .header-nav-item-link {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    color: $primary-font-color;
+
+    @include mq('sp') {
+      color: $primary-color;
+      font-size: 18px;
+      text-align: right;
+      padding: 0 40px;
+    }
+  }
+}
+
+/*------------------------------
+top
+------------------------------*/
+
+.top {
+  position: relative;
+
+  .top-image {
+    
+    background: url("../img/sunflower.jpg") center center / cover;
+    padding-top: 58%;
+
+    // スマホの時トップ  
+    @include mq('sp') {
+      background: url("../img/sunflower_sp.png") center center / cover;
+      height: 100vh;
+    }
+
+  }
+
+  .top-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+  }
+
+  .top-title {
+    font-size: 50px;
+    font-family: 'Lato', sans-serif;
+
+    @include mq('sp') {
+      font-size: 32px;
+    }
+  }
+
+  .top-link {
+    border: 1px solid #fff;
+    border-radius: 300px;
+    width: 200px;
+    padding: 10px 20px;
+    margin: 20px auto 0;
+    display: block;
+    color: #fff;
+    font-size: 18px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+
+
+  .fa-paper-plane {
+    margin-right: 10px;
+  }
+
+
+
+  @include mq('sp') {
+    height: 100vh;
+  }
+}
+
+/*------------------------------
+about
+------------------------------*/
+
+.about {
+  padding-bottom: 120px;
+
+  .about-inner {
+    
+    @include mq('pc') {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;  
+    }
+
+  }
+
+  .about-item-picture {
+    order: 2;
+    text-align: center;
+    img {
+      border-radius: 100%;
+      width: 270px;
+    }
+
+    @include mq('pc') {
+      width: 35%;
+    }
+  }
+
+  .about-item-body {
+    @include mq('pc') {
+      width: 65%;
+    }
+
+    @include mq('tb') {
+      margin-top: 30px;;
+    }
+
+    @include mq('sp') {
+      margin-top: 30px;;
+    }
+  }
+
+  .about-item-title {
+    position: relative;
+    border-bottom: dashed 3px $primary-color;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+  }    
+  }
+
+  // Twitter
+  .about-btn {
+    margin-top: 30px;
+    @include mq('sp') {
+      text-align: center;
+    }
+
+  .about-btn-twitter {
+    display: inline-block;
+    text-decoration: none;
+    width: 50px;
+    margin:2px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 23px;
+    color:white;
+    border-radius: 12px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    transition: .3s;
+    background: #22b8ff;
+
+    :hover {
+    opacity: 0.7;
+    transition: background-color .4s, ease 0s;
+    }
+
+  }
+  .about-btn-twitter i {
+    line-height:50px;
+  }
+
+  .about-btn-text {
+    font-weight: bold;
+  }
+  
+}
+
+
+/*------------------------------
+skills
+------------------------------*/
+
+.skills {
+  background: $sub-color;
+
+  .skills-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .skills-item {
+    background: #fff;
+    width: calc(33.33333333% - 50px * 2 / 3);
+    height: 300px;
+    margin-right: 50px;
+    margin-top: 24px;
+    padding: 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+
+    // PC時、3n番目のカードの右の余白はなし
+    &:nth-child(3n) {
+      @include mq('pc') {
+        margin-right: 0px;
+      }
+    }
+
+    // タブレット時、2n番目のカードの右の余白はなし
+    &:nth-child(2n) {
+      @include mq('tb') {
+        margin-right: 0px;
+      }
+    }
+        
+    @include mq('tb') {
+      // タブレット時、カードの大きさ
+      width: calc(50% - 50px / 2);
+    }
+
+    @include mq('sp') {
+      // スマホ時、カードの大きさ
+      width: 100%;
+      margin-right: 0px;
+    }
+  }
+
+  .skills-item-picture {
+    text-align: center;
+
+    .fab, .fas {
+      font-size: 70px;
+    }
+    
+    .fa-html5 {
+      color: #ff5d0f;
+    }
+
+    .fa-css3-alt {
+      color: #08a7e3;
+    }
+
+    .fa-bootstrap {
+      color: #6539b0;
+    }
+
+    .fa-js-square {
+      color: #ecbe37;
+    }
+
+    .fa-sass {
+      color: #c56494;
+    }
+
+    .fa-wordpress {
+      color: #207195;
+    }
+
+    .fa-mobile-alt {
+      color: #f783ac;
+    }
+  }
+
+
+
+  .skills-item-body {
+    text-align: center;
+
+  }
+
+  .skills-item-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0 10px;
+  }
+
+}
+
+/*------------------------------
+works
+------------------------------*/
+
+.works {
+  padding-bottom: 120px;
+
+  .works-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .works-item {
+    // background: $primary-color;
+    width: calc(33.33333333% - 60px * 2 / 3);
+    height: 600px;
+    margin-right: 60px;
+    margin-top: 24px;
+    padding: 16px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+    color: $primary-font-color;
+    cursor: pointer;
+
+    // PC時、3n番目のカードの右の余白はなし
+    &:nth-child(3n) {
+      @include mq('pc') {
+        margin-right: 0px;
+      }
+    }
+
+
+    // タブレット時、2n番目のカードの右の余白はなし
+    &:nth-child(2n) {
+      @include mq('tb') {
+        margin-right: 0px;
+      }
+    }
+        
+    @include mq('tb') {
+      // タブレット時、カードの大きさ
+      width: calc(50% - 60px / 2);
+    }
+
+    @include mq('sp') {
+      width: 100%;
+      margin-right: 0px;
+    }
+
+    .works-item-body {
+      // background: #fff;
+      margin-top: 30px;
+    }
+
+    .works-item-title {
+      border-bottom: dashed 3px $primary-color;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  }
+
+  .works-item-picture {
+    position: relative;
+    transition: all 0.3s ease 0s;
+    
+    &:hover {
+      transform: scale(1.1, 1.1);
+      cursor: pointer;
+    }
+  }
+}
+
+/*------------------------------
+contact
+------------------------------*/
+
+.contact {
+  background: url("../img/contact.jpg");
+  position: relative;
+
+  .contact-title {
+    color: #fff;
+  }
+
+  @include mq('sp') {
+    padding: 56px 28px;
+  }
+
+.contact-form {
+  margin-top: 56px;
+
+  @include mq('sp') {
+    margin-top: 26px;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  border:0;
+  font-size: 16px;
+  padding: .2em .5em;
+  box-shadow: 5px 6px 15px rgba(96, 96, 96, 0.16);
+  border-radius: 2px;
+}
+
+input[type="text"],
+input[type="email"] {
+  height: 40px;
+}
+
+textarea {
+  min-height: 122px;
+  resize: vertical;
+}
+
+.contact-text {
+  font-size: 14px;
+  letter-spacing: .1em;
+  text-align: center;
+}
+
+.contact-item-inline {
+  font-size: 16px;
+  color: #E7728E
+}
+
+.contact-list {
+  max-width: 510px;
+  margin: 18px auto 0;
+}
+
+.contact-footer {
+  text-align: center;
+}
+
+// dtとdd囲ってる部分
+.contact-item  {
+  
+  @include mq('pc') {
+    display: flex;
+  }
+  margin-bottom: 32px;
+
+  :last-child {
+    margin-bottom: 0px;
+  }
+}
+
+// dt
+.contact-item-title {
+  // background: rgba(62, 161, 209, 0.7);
+  background: $primary-color;
+  color: #fff;
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+
+  @include mq('sp') {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 32px;
+    height: 32px;
+    padding: 0 16px;
+  }
+
+  @include mq('pc') {
+    flex: 0 1 100%;
+  }
+
+}
+
+.contact-item-title-inline {
+  font-size: 12px;
+  color: #E7728E;
+  vertical-align: super;
+  line-height: 1;
+
+  @include mq('sp') {
+    font-size: 10px;
+  }
+}
+
+// dd
+.contact-item-input {
+
+  @include mq('sp') {
+    margin-top: 3px;
+  }
+
+  @include mq('pc') {
+    flex: 0 0 320px;
+    margin-left: 18px; 
+  }
+  text-align: left;
+}
+
+// 送信ボタン部分
+.contact-footer-submit {
+  margin-top: 46px;
+  text-align: center;
+
+  @include mq('sp') {
+    margin-top: 24px;
+  }
+
+  .submit-btn {
+    width: 150px;
+    height: 45px;
+    border: 1px solid $primary-color;
+    margin: 40px auto 0;
+    padding: 10px 40px;
+    color: #fff;
+    background: $primary-color;
+    // hoverフワッとさせる 
+    transition: background-color .4s, color .4s;
+    cursor: pointer;
+
+    
+    &:hover {
+      background: #fff;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+    }
+  }
+
+}
+
+}
+
+
+
+/*------------------------------
+footer
+------------------------------*/
+
+footer {
+  background: pink;
+}
+
+/*------------------------------
+top
+------------------------------*/
+
+ .totop {
+  width: 60px;
+  height: 60px;
+  z-index: 30;
+  position: fixed;
+  background: $primary-color;
+  bottom: 24px;
+  right: 24px;
+  visibility: hidden;   
+  transition: all 0.3s ease 0s; 
+  text-align: center;
+  border-radius: 20%;
+  
+  .fa-sort-up {
+    color: white;
+    font-size: 50px;
+    display: block;
+    padding: 15px;
+  }
+
+  &.is-show {
+    visibility: visible;
+  } 
+
+}
+
