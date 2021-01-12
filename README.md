@@ -4,7 +4,7 @@ https://hypermayu.site/
 
 自己紹介ポートフォリオです。
 
-・「WOW」でアニメーションを実装
-・ドロワーの設置
-・googleformを設置
-・スムーススクロール
+・「WOW」でアニメーションを実装<br>
+・ドロワーの設置<br>
+・googleformを設置<br>
+・スムーススクロール<br>
